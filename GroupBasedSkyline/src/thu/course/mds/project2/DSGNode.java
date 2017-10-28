@@ -19,6 +19,17 @@ public class DSGNode {
 		parents = new ArrayList<Integer>();
 		children = new ArrayList<Integer>();
 	}
+	
+	public DSGNode(int layerIndex, int pointIndex, int d,
+			List<Double> attributes) {
+		super();
+		this.layerIndex = layerIndex;
+		this.pointIndex = pointIndex;
+		this.d = d;
+		this.attributes = attributes;
+		parents = new ArrayList<Integer>();
+		children = new ArrayList<Integer>();
+	}
 	public int getLayerIndex() {
 		return layerIndex;
 	}
@@ -56,6 +67,17 @@ public class DSGNode {
 		this.attributes = attributes;
 	}
 	
+	public void showNode(){
+		System.out.print("idx:"+this.pointIndex+",layer:"+this.layerIndex+",parents:");
+		for(Integer i:parents){
+			System.out.print(i+" ");
+		}
+		System.out.print(",children: ");
+		for(Integer i:children){
+			System.out.print(i+" ");
+		}
+		System.out.println();
+	}
 	
 	
 }
