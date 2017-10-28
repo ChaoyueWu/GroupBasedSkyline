@@ -68,6 +68,9 @@ public class DSGNode {
 	}
 	
 	public void showNode(){
+		for(int i = 0;i<this.attributes.size();i++){
+			System.out.print(attributes.get(i) + " ");
+		}
 		System.out.print("idx:"+this.pointIndex+",layer:"+this.layerIndex+",parents:");
 		for(Integer i:parents){
 			System.out.print(i+" ");

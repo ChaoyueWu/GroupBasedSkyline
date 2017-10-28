@@ -2,9 +2,7 @@ package thu.course.mds.project2;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 构造K条skyline
@@ -143,34 +141,73 @@ public class DSGGenerator {
 	 */
 	public DSG generateDSG(){
 		this.generateSkylines();
-		this.showSkylines();
-		Map<Integer,DSGNode> map = new HashMap<Integer,DSGNode>();//方便查找&构造
-		for(Point p:skylines.get(0)){
-			DSGNode node = new DSGNode(1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
-			map.put(p.getIdx(), node);
+		int index = 0;		
+		
+		for(int i = 0 ; i < k ; i ++) {
+			ArrayList<Point> skyline = skylines.get(i);
+			for(int j = 0 ; j < skyline.size() ; j ++) {
+				Point p = skyline.get(j);
+				//DSGNode node = new DSGNode(i,index,this.d,toArrayList(p.getAttributes()));
+				p.setIdx(index);
+				index ++;
+			}
 		}
-		for(int i = 1;i<k;i++){	//添加每一层的点
-			for(Point p:skylines.get(i)){
-				DSGNode node = new DSGNode(i+1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
-				for(int j = 0;j<i;j++){
-					for(Point p1:skylines.get(j)){
-						if(p.isDominatedBy(p1, this.d)){
-							map.get(p1.getIdx()).getChildren().add(p.getIdx());
-							node.getParents().add(p1.getIdx());
+		System.out.println("index:"+index);
+		this.showSkylines();
+		List<DSGNode> dsgList = new ArrayList<DSGNode>();
+		for(int i = 0 ; i < k ; i ++) {
+			ArrayList<Point> skyline = skylines.get(i);
+			for(int j = 0 ; j < skyline.size() ; j ++) {
+				Point p = skyline.get(j);
+				DSGNode node = new DSGNode(i + 1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
+				List<Integer> parents = node.getParents();
+				List<Integer> children = node.getChildren();
+				for(int m = 0 ; m < i ; m ++) {
+					ArrayList<Point> skylineP = skylines.get(m);
+					for(int n = 0 ; n < skylineP.size() ; n ++) {
+						if(p.isDominatedBy(skylineP.get(n), d)) {
+							parents.add(skylineP.get(n).getIdx());
 						}
 					}
 				}
-				map.put(p.getIdx(), node);
+				for(int m = i + 1 ; m < k ; m ++) {
+					ArrayList<Point> skylineC = skylines.get(m);
+					for(int n = 0 ; n < skylineC.size() ; n ++) {
+						if(skylineC.get(n).isDominatedBy(p, d)) {
+							children.add(skylineC.get(n).getIdx());
+						}
+					}
+				}
+				dsgList.add(node);
 			}
 		}
-		List<DSGNode> dsgList = new ArrayList<DSGNode>();
-		for (Map.Entry<Integer, DSGNode> entry : map.entrySet()) {  
-			dsgList.add(entry.getValue()); 
-		}  
+		
+//		Map<Integer,DSGNode> map = new HashMap<Integer,DSGNode>();//方便查找&构造
+//		for(Point p:skylines.get(0)){
+//			DSGNode node = new DSGNode(1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
+//			map.put(p.getIdx(), node);
+//		}
+//		for(int i = 1;i<k;i++){	//添加每一层的点
+//			for(Point p:skylines.get(i)){
+//				DSGNode node = new DSGNode(i+1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
+//				for(int j = 0;j<i;j++){
+//					for(Point p1:skylines.get(j)){
+//						if(p.isDominatedBy(p1, this.d)){
+//							map.get(p1.getIdx()).getChildren().add(p.getIdx());
+//							node.getParents().add(p1.getIdx());
+//						}
+//					}
+//				}
+//				map.put(p.getIdx(), node);
+//			}
+//		}
+//		List<DSGNode> dsgList = new ArrayList<DSGNode>();
+//		for (Map.Entry<Integer, DSGNode> entry : map.entrySet()) {  
+//			dsgList.add(entry.getValue()); 
+//		}  
 		DSG dsg = new DSG();
 		dsg.DSG = dsgList;
 		return dsg;
-		
 	}
 	/**
 	 * 将double类型的数组封装为List<Double>

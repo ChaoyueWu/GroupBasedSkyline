@@ -9,9 +9,8 @@ public class Point implements Comparable<Point>{
 	private int idx;
 	private double[] attributes;
 
-	public Point(int idx, double[] attributes) {
+	public Point(double[] attributes) {
 		super();
-		this.idx = idx;
 		this.attributes = attributes;
 	}
 
