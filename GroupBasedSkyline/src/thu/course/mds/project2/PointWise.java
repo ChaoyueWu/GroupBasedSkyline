@@ -5,7 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 public class PointWise {
-	List<PointWise_Group> pointWiseCalculate(int k , int Sk , DSG dsg){
+	List<PointWise_Group> pointWiseCalculate(int k , DSG dsg){
+		List<DSGNode> DSG = dsg.DSG;
+		int Sk = DSG.size();
 		List<PointWise_Group> groupList = new ArrayList<PointWise_Group>();
 		PointWise_Group g0 = new PointWise_Group();
 		groupList.add(g0);
@@ -26,7 +28,7 @@ public class PointWise {
 				ArrayList<Integer> tailList = new ArrayList<Integer>();
 				for(int t = g.tailIndex ; t < Sk ; t ++) {
 					//g的tail Set从 tailIndex 开始
-					DSGNode node = dsg.DSG.get(t);
+					DSGNode node = DSG.get(t);
 					if(!childrenSet.contains(t) && !isSkylinePoint(node)) {
 						//如果节点没有在子节点集合中并且不是skyline节点，则不加入
 						continue;
@@ -41,7 +43,7 @@ public class PointWise {
 					}
 				}
 				for(int candidate : tailList) {
-					PointWise_Group gNew = new PointWise_Group(g,dsg.DSG.get(candidate));
+					PointWise_Group gNew = new PointWise_Group(g,DSG.get(candidate));
 					if(isSkylineGroup(gNew , i)) {
 						groupList.add(gNew);
 						tmpCount ++;
