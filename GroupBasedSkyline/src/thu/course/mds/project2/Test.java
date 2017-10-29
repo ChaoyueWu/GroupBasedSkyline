@@ -33,7 +33,7 @@ public class Test {
 		d = points.get(0).getAttributes().length;
 		long startTime = System.nanoTime();//毫微秒
 		DSGGenerator sg = new DSGGenerator(4,points,d);
-		DSG dsg = sg.generateDSG();
+		ProcessResult dsg = sg.generateDSG();
 		System.out.println("预处理之后剩余的节点数:"+dsg.DSG.size());
 //		for(DSGNode node:dsg.DSG){
 //			node.showNode();

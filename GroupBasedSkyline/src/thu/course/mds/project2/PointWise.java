@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 public class PointWise {
-	int pointWiseCalculate(int k , DSG dsg){
+	int pointWiseCalculate(int k , ProcessResult dsg){
 		List<DSGNode> DSG = dsg.DSG;
 		List<PointWise_Group> groupListNew = dsg.groupList;
 		

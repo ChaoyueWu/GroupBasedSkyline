@@ -141,11 +141,11 @@ public class DSGGenerator {
 	 * 生成DSG供后续步骤使用
 	 * @return
 	 */
-	public DSG generateDSG(){
+	public ProcessResult generateDSG(){
 		this.generateSkylines();
 		this.showSkylines();
 		
-		DSG dsg = new DSG();
+		ProcessResult dsg = new ProcessResult();
 		List<DSGNode> perfectNodeList = dsg.perfectNodeList;
 		for(int i = k -1 ; i >= 0 ; i --) {//从大往小遍历预处理
 			ArrayList<Point> skyline = skylines.get(i);
