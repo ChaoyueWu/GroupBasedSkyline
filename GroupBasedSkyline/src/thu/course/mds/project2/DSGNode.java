@@ -75,7 +75,7 @@ public class DSGNode {
 		for(Integer i:parents){
 			System.out.print(i+" ");
 		}
-		System.out.print(",children: ");
+		System.out.print(",children size:"+children.size()+" : ");
 		for(Integer i:children){
 			System.out.print(i+" ");
 		}
