@@ -15,7 +15,7 @@ public class Test {
 		BufferedReader br = null;
 		int d = 0;
 		try {
-			reader = new FileReader("dataSet/test.txt");
+			reader = new FileReader("dataSet/anti_2.txt");
 			br = new BufferedReader(reader);
 			String str;
 			while((str = br.readLine()) != null) {
@@ -68,24 +68,27 @@ public class Test {
 //		Point p10 = new Point(d10);
 //		points.add(p10);
 		
+		
 		DSGGenerator sg = new DSGGenerator(4,points,d);
-		DSG dsg = sg.generateDSG();
-		for(DSGNode node:dsg.DSG){
-			node.showNode();
-		}
-		PointWise pointWise = new PointWise();
-		List<PointWise_Group> groups = pointWise.pointWiseCalculate(4, dsg);
-		for(PointWise_Group group : groups) {
-			System.out.println("group:");
-			List<DSGNode> list = group.list;
-			for(DSGNode node : list) {
-				node.showNode();
-			}
-		}
+//		
+//		DSG dsg = sg.generateDSG();
+//		for(DSGNode node:dsg.DSG){
+//			node.showNode();
+//		}
+//		PointWise pointWise = new PointWise();
+//		List<PointWise_Group> groups = pointWise.pointWiseCalculate(4, dsg);
+//		for(PointWise_Group group : groups) {
+//			System.out.println("group:");
+//			List<DSGNode> list = group.list;
+//			for(DSGNode node : list) {
+//				node.showNode();
+//			}
+//		}
 		
 		//unit wise
 		UnitWise uw = new UnitWise();
-		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg);
+		List<List<Integer>> result = uw.unitWiseCalculate(4, sg.generateDSG().DSG);
+		
 		for (List<Integer> rr : result) {
 			for (Integer r : rr) {
 				System.out.print(r.intValue() + "  ");
@@ -93,6 +96,7 @@ public class Test {
 			System.out.println();
 		}
 		
+		System.out.println(result.size());
 		
 	}
 
