@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 public class Test {
 	public static void main(String[] args) {
 		List<Point> points  = new ArrayList<Point>();
@@ -80,6 +82,18 @@ public class Test {
 				node.showNode();
 			}
 		}
+		
+		//unit wise
+		UnitWise uw = new UnitWise();
+		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg);
+		for (List<Integer> rr : result) {
+			for (Integer r : rr) {
+				System.out.print(r.intValue() + "  ");
+			}
+			System.out.println();
+		}
+		
+		
 	}
 
 }
