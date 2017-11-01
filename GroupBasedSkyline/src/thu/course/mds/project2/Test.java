@@ -1,5 +1,6 @@
 package thu.course.mds.project2;
 
+import java.awt.print.Printable;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -86,17 +87,20 @@ public class Test {
 //		}
 		
 		//unit wise
+		long begintime = System.nanoTime();
 		UnitWise uw = new UnitWise();
 		List<List<Integer>> result = uw.unitWiseCalculate(4, sg.generateDSG().DSG);
 		
-		for (List<Integer> rr : result) {
-			for (Integer r : rr) {
-				System.out.print(r.intValue() + "  ");
-			}
-			System.out.println();
-		}
+//		for (List<Integer> rr : result) {
+//			for (Integer r : rr) {
+//				System.out.print(r.intValue() + "  ");
+//			}
+//			System.out.println();
+//		}
 		
 		System.out.println(result.size());
+		long endtime = System.nanoTime();
+		System.out.println("time " + (endtime - begintime) / 1000.0 / 1000.0 / 1000.0);
 		
 	}
 
