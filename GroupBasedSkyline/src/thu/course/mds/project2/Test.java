@@ -33,7 +33,6 @@ public class Test {
 		d = points.get(0).getAttributes().length;
 		
 		DSGGenerator sg = new DSGGenerator(4,points,d);
-<<<<<<< HEAD
 		
 		ProcessResult dsg = sg.generateDSG();
 //		for(DSGNode node:dsg.DSG){
@@ -47,39 +46,40 @@ public class Test {
 //		System.out.println("point wise size: "+ groupsSize);
 //		System.out.println("point wise time : " +(endTine - startTime)/1000);
 		
-		//unit wise
-		UnitWise uw = new UnitWise();
-		long startTime = System.nanoTime();//毫微秒
-		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
-		long endTine = System.nanoTime();//毫微秒
-		System.out.println("unit wise size "+result.size());
-		System.out.println("point wise time : " +(endTine - startTime)/1000);
-=======
 //		long startTime = System.nanoTime();//毫微秒
-//		PointWise pointWise = new PointWise();
-//		int groupsSize = pointWise.pointWiseCalculate(4, sg.generateDSG());
+//		PointWiseUsingArray pointWiseUsingArray = new PointWiseUsingArray();
+//		int groupsSize = pointWiseUsingArray.pointWiseCalculate(4, dsg);
 //		long endTine = System.nanoTime();//毫微秒
-//		System.out.println("point wise size: "+ groupsSize);
-//		System.out.println("point wise time : " +(endTine - startTime)/1000);
-//		System.exit(0);
+//		System.out.println("point wise2 array size: "+ groupsSize);
+//		System.out.println("point wise2 array time : " +(endTine - startTime)/1000);
+//		
+//		UnitWise uw = new UnitWise();
+//		long startTime = System.nanoTime();//毫微秒
+//		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("unit wise1 size "+result.size());
+//		System.out.println("unit wise1 time : " +(endTine - startTime)/1000);
 		
-		//unit wise
-		long begintime = System.nanoTime();
-		UnitWise2 uw = new UnitWise2();
-		List<List<Integer>> result = uw.unitWiseCalculate(4, sg.generateDSG().DSG);
+//		UnitWise2 uw = new UnitWise2();
+//		long startTime = System.nanoTime();//毫微秒
+//		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("unit wise2 size "+result.size());
+//		System.out.println("unit wise2 time : " +(endTine - startTime)/1000);
 		
-//		for (List<Integer> rr : result) {
-//			for (Integer r : rr) {
-//				System.out.print(r.intValue() + "  ");
-//			}
-//			System.out.println();
-//		}
+//		UnitWise3 uw = new UnitWise3();
+//		long startTime = System.nanoTime();//毫微秒
+//		List<Set<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("unit wise3 size "+result.size());
+//		System.out.println("unit wise3 time : " +(endTine - startTime)/1000);
 		
-		System.out.println(result.size());
-		long endtime = System.nanoTime();
-		System.out.println("time " + (endtime - begintime) / 1000.0 / 1000.0 / 1000.0);
-		
->>>>>>> 8953ea9e2e7c4ee83984fb20e0b300262750847a
+//		UnitWise4 uw = new UnitWise4();
+//		long startTime = System.nanoTime();//毫微秒
+//		List<Set<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("unit wise4 size "+result.size());
+//		System.out.println("unit wise4 time : " +(endTine - startTime)/1000);
 	}
 
 }
