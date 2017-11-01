@@ -33,6 +33,7 @@ public class Test {
 		d = points.get(0).getAttributes().length;
 		
 		DSGGenerator sg = new DSGGenerator(4,points,d);
+<<<<<<< HEAD
 		
 		ProcessResult dsg = sg.generateDSG();
 //		for(DSGNode node:dsg.DSG){
@@ -53,6 +54,32 @@ public class Test {
 		long endTine = System.nanoTime();//毫微秒
 		System.out.println("unit wise size "+result.size());
 		System.out.println("point wise time : " +(endTine - startTime)/1000);
+=======
+//		long startTime = System.nanoTime();//毫微秒
+//		PointWise pointWise = new PointWise();
+//		int groupsSize = pointWise.pointWiseCalculate(4, sg.generateDSG());
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("point wise size: "+ groupsSize);
+//		System.out.println("point wise time : " +(endTine - startTime)/1000);
+//		System.exit(0);
+		
+		//unit wise
+		long begintime = System.nanoTime();
+		UnitWise2 uw = new UnitWise2();
+		List<List<Integer>> result = uw.unitWiseCalculate(4, sg.generateDSG().DSG);
+		
+//		for (List<Integer> rr : result) {
+//			for (Integer r : rr) {
+//				System.out.print(r.intValue() + "  ");
+//			}
+//			System.out.println();
+//		}
+		
+		System.out.println(result.size());
+		long endtime = System.nanoTime();
+		System.out.println("time " + (endtime - begintime) / 1000.0 / 1000.0 / 1000.0);
+		
+>>>>>>> 8953ea9e2e7c4ee83984fb20e0b300262750847a
 	}
 
 }
