@@ -71,24 +71,17 @@ public class Test {
 		
 		
 		DSGGenerator sg = new DSGGenerator(4,points,d);
-//		
-//		DSG dsg = sg.generateDSG();
-//		for(DSGNode node:dsg.DSG){
-//			node.showNode();
-//		}
+//		long startTime = System.nanoTime();//毫微秒
 //		PointWise pointWise = new PointWise();
-//		List<PointWise_Group> groups = pointWise.pointWiseCalculate(4, dsg);
-//		for(PointWise_Group group : groups) {
-//			System.out.println("group:");
-//			List<DSGNode> list = group.list;
-//			for(DSGNode node : list) {
-//				node.showNode();
-//			}
-//		}
+//		int groupsSize = pointWise.pointWiseCalculate(4, sg.generateDSG());
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("point wise size: "+ groupsSize);
+//		System.out.println("point wise time : " +(endTine - startTime)/1000);
+//		System.exit(0);
 		
 		//unit wise
 		long begintime = System.nanoTime();
-		UnitWise uw = new UnitWise();
+		UnitWise2 uw = new UnitWise2();
 		List<List<Integer>> result = uw.unitWiseCalculate(4, sg.generateDSG().DSG);
 		
 //		for (List<Integer> rr : result) {
