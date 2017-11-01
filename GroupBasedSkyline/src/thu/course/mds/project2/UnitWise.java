@@ -71,11 +71,7 @@ public class UnitWise {
 					
 				for (UnitGroup curCandiGroup : candiGroups) {
 					
-					Set<RefNode> ps = new HashSet<RefNode>();
-//					ps = curCandiGroup.nodes;
-					for (Unit u : curCandiGroup.units) {
-						ps.addAll(u.parents);
-					}				
+					Set<RefNode> ps = curCandiGroup.nodes;
 //					
 					for (int c=curCandiGroup.tailIdx+1;c<refdsg.numNodes;c++) {
 						if (!ps.contains(refdsg.orderedNodes[c])) {
@@ -99,23 +95,7 @@ public class UnitWise {
 					}
 				}
 				
-//				for (int c =0;c<newCandiGroups.size();c++) {
-//					if (newCandiGroups.get(c).nodes.size() == k) {
-//						List<Integer> newResult = new ArrayList<Integer>();
-//						for (RefNode rn : newCandiGroups.get(c).nodes) {
-//							newResult.add(rn.originPointIdx);
-//						}
-//						
-//						resultIdx.add(newResult);
-//					}
-//					if (newCandiGroups.get(c).nodes.size() >= k) {
-//						newCandiGroups.remove(c);
-//						c --;
-//					}
-//				}
-				
 				candiGroups = newCandiGroups;
-//				System.out.println("size " + newCandiGroups.size());
 			}		
 		}
 		
