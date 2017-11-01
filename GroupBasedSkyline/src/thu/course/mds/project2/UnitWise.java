@@ -1,4 +1,5 @@
 package thu.course.mds.project2;
+import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -34,13 +35,12 @@ public class UnitWise {
 		for (int i =0;i<refdsg.numNodes;i++) {
 			singleUnitGroups[i] = new UnitGroup(refdsg.orderedUnits[i], i);
 		}
+			
 		
 		for (int a=0;a<singleUnitGroups.length;a++) {
-			System.out.println(a);
-			if (a==250) {
-				System.out.println("ahahah");
-			}
+						
 			UnitGroup singleUnitGroup = singleUnitGroups[a];
+			
 			// check Glast
 			HashSet<RefNode> glast = new HashSet<RefNode>();
 			glast.addAll(singleUnitGroup.nodes);
@@ -59,7 +59,6 @@ public class UnitWise {
 				break;
 			}
 			
-			int i = 2;
 			List<UnitGroup> candiGroups = new ArrayList<UnitGroup>();
 			candiGroups.add(singleUnitGroup);
 
@@ -70,43 +69,53 @@ public class UnitWise {
 				}
 				List<UnitGroup> newCandiGroups = new ArrayList<UnitGroup>();
 					
-				int curCandiGroupIdx = 0;
-				while (curCandiGroupIdx < candiGroups.size()) {
-					UnitGroup curCandiGroup = candiGroups.get(curCandiGroupIdx);
+				for (UnitGroup curCandiGroup : candiGroups) {
 					
 					Set<RefNode> ps = new HashSet<RefNode>();
+//					ps = curCandiGroup.nodes;
 					for (Unit u : curCandiGroup.units) {
 						ps.addAll(u.parents);
 					}				
-					
+//					
 					for (int c=curCandiGroup.tailIdx+1;c<refdsg.numNodes;c++) {
-						Set<Integer> s = new HashSet<>();
 						if (!ps.contains(refdsg.orderedNodes[c])) {
+							
 							UnitGroup newUnitGroup = new UnitGroup(curCandiGroup);
 							newUnitGroup.addUnit(refdsg.orderedUnits[c], c);
-							newCandiGroups.add(newUnitGroup);	
+							
+							if (newUnitGroup.nodes.size() == k) {
+								List<Integer> newResult = new ArrayList<Integer>();
+								for (RefNode rn : newUnitGroup.nodes) {
+									newResult.add(rn.originPointIdx);
+								}
+								
+								resultIdx.add(newResult);
+							}
+							else if (newUnitGroup.nodes.size() < k) {
+								newCandiGroups.add(newUnitGroup);	
+							}
 						}
+							
 					}
-					curCandiGroupIdx += 1;
 				}
 				
-				for (int c =0;c<newCandiGroups.size();c++) {
-					if (newCandiGroups.get(c).nodes.size() == k) {
-						List<Integer> newResult = new ArrayList<Integer>();
-						for (RefNode rn : newCandiGroups.get(c).nodes) {
-							newResult.add(rn.originPointIdx);
-						}
-						
-						resultIdx.add(newResult);
-					}
-					if (newCandiGroups.get(c).nodes.size() >= k) {
-						newCandiGroups.remove(c);
-						c --;
-					}
-				}
+//				for (int c =0;c<newCandiGroups.size();c++) {
+//					if (newCandiGroups.get(c).nodes.size() == k) {
+//						List<Integer> newResult = new ArrayList<Integer>();
+//						for (RefNode rn : newCandiGroups.get(c).nodes) {
+//							newResult.add(rn.originPointIdx);
+//						}
+//						
+//						resultIdx.add(newResult);
+//					}
+//					if (newCandiGroups.get(c).nodes.size() >= k) {
+//						newCandiGroups.remove(c);
+//						c --;
+//					}
+//				}
 				
 				candiGroups = newCandiGroups;
-				System.out.println("size" + newCandiGroups.size());
+//				System.out.println("size " + newCandiGroups.size());
 			}		
 		}
 		

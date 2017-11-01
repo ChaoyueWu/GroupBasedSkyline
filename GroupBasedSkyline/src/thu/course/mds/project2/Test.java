@@ -1,5 +1,6 @@
 package thu.course.mds.project2;
 
+import java.awt.print.Printable;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -45,7 +46,6 @@ public class Test {
 		long endTine = System.nanoTime();//毫微秒
 		System.out.println("point wise size: "+ groupsSize);
 		System.out.println("point wise time : " +(endTine - startTime)/1000);
-		
 		
 		//unit wise
 		UnitWise uw = new UnitWise();
