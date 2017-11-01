@@ -1,6 +1,5 @@
 package thu.course.mds.project2;
 
-import java.awt.print.Printable;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -40,18 +39,18 @@ public class Test {
 //			node.showNode();
 //		}
 		
-		long startTime = System.nanoTime();//毫微秒
-		PointWise pointWise = new PointWise();
-		int groupsSize = pointWise.pointWiseCalculate(4, dsg);
-		long endTine = System.nanoTime();//毫微秒
-		System.out.println("point wise size: "+ groupsSize);
-		System.out.println("point wise time : " +(endTine - startTime)/1000);
+//		long startTime = System.nanoTime();//毫微秒
+//		PointWise pointWise = new PointWise();
+//		int groupsSize = pointWise.pointWiseCalculate(4, dsg);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("point wise size: "+ groupsSize);
+//		System.out.println("point wise time : " +(endTine - startTime)/1000);
 		
 		//unit wise
 		UnitWise uw = new UnitWise();
-		startTime = System.nanoTime();//毫微秒
+		long startTime = System.nanoTime();//毫微秒
 		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
-		endTine = System.nanoTime();//毫微秒
+		long endTine = System.nanoTime();//毫微秒
 		System.out.println("unit wise size "+result.size());
 		System.out.println("point wise time : " +(endTine - startTime)/1000);
 	}
