@@ -39,12 +39,12 @@ public class Test {
 //			node.showNode();
 //		}
 		
-//		long startTime = System.nanoTime();//毫微秒
-//		PointWise pointWise = new PointWise();
-//		int groupsSize = pointWise.pointWiseCalculate(4, dsg);
-//		long endTine = System.nanoTime();//毫微秒
-//		System.out.println("point wise size: "+ groupsSize);
-//		System.out.println("point wise time : " +(endTine - startTime)/1000);
+		long startTime = System.nanoTime();//毫微秒
+		PointWise pointWise = new PointWise();
+		int groupsSize = pointWise.pointWiseCalculate(4, dsg);
+		long endTine = System.nanoTime();//毫微秒
+		System.out.println("point wise size: "+ groupsSize);
+		System.out.println("point wise time : " +(endTine - startTime)/1000);
 		
 //		long startTime = System.nanoTime();//毫微秒
 //		PointWiseUsingArray pointWiseUsingArray = new PointWiseUsingArray();
