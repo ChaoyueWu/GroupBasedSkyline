@@ -1,5 +1,4 @@
 package thu.course.mds.project2;
-import java.awt.print.Printable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -101,32 +100,27 @@ public class UnitWise {
 	class UnitGroup {
 		
 		int tailIdx = -1;
-//		Set<Unit> units = new HashSet<Unit>();
 		Set<RefNode> nodes = new HashSet<RefNode>();
 		
 		public UnitGroup(Unit u, int tailIdx) {
-//			this.units.add(u);
 			this.nodes.addAll(u.parents);
 			this.nodes.add(u.startNode);
 			this.tailIdx = tailIdx;
 		}
 		
 		public UnitGroup(UnitGroup ug) {
-//			this.units.addAll(ug.units);
 			this.nodes.addAll(ug.nodes);
 			this.tailIdx = ug.tailIdx;
 		}
 		
 		
 		public void addUnit(Unit u, int newTailIdx) {
-//			this.units.add(u);
 			this.nodes.addAll(u.parents);
 			this.nodes.add(u.startNode);
 			this.tailIdx = newTailIdx;
 		}
-		
-		
 	}
+	
 	
 	class Unit {
 		
