@@ -35,10 +35,10 @@ public class Test {
 		
 		DSGGenerator sg = new DSGGenerator(k,points,d);
 		
-		long startTime = System.nanoTime();//毫微秒
+//		long startTime = System.nanoTime();//毫微秒
 		ProcessResult dsg = sg.generateDSG();
-		long endTine = System.nanoTime();//毫微秒
-		System.out.println("generate dsg time : " +(endTine - startTime)/1000);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("generate dsg time : " +(endTine - startTime)/1000);
 //		long startTime = System.nanoTime();//毫微秒
 //		PointWise pointWise = new PointWise();
 //		int groupsSize = pointWise.pointWiseCalculate(k, dsg);

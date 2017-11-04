@@ -145,7 +145,10 @@ public class DSGGenerator {
 	 * @return
 	 */
 	public ProcessResult generateDSG(){
+		long startTime = System.nanoTime();//毫微秒
 		this.generateSkylines();
+		long endTine = System.nanoTime();//毫微秒
+		System.out.println("generate first k skylines time : " +(endTine - startTime)/1000);
 		this.showSkylines();
 		
 		ProcessResult dsg = new ProcessResult();
