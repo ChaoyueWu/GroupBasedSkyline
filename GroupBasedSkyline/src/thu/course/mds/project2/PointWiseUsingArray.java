@@ -93,6 +93,7 @@ public class PointWiseUsingArray {
 					tailList[m] = 0;
 				}
 			}
+//			System.out.println("tmpCount: "+ tmpCount);
 			start = count;
 			count = tmpCount + count;
 		}
