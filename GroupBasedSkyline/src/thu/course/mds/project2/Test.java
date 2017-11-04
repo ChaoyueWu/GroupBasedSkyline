@@ -36,10 +36,6 @@ public class Test {
 		DSGGenerator sg = new DSGGenerator(k,points,d);
 		
 		ProcessResult dsg = sg.generateDSG();
-//		for(DSGNode node:dsg.DSG){
-//			node.showNode();
-//		}
-		
 //		long startTime = System.nanoTime();//毫微秒
 //		PointWise pointWise = new PointWise();
 //		int groupsSize = pointWise.pointWiseCalculate(k, dsg);
