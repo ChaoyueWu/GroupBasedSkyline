@@ -127,14 +127,17 @@ public class DSGGenerator {
 	
 	public void showSkylines(){
 		int i = 1;
+		int count = 0;
 		for(ArrayList<Point> list:skylines){
-			System.out.println("skyline "+i++);
+//			System.out.println("skyline "+i++);
 //			for(Point p:list){
 //				System.out.print(p);
 //				
 //			}
-			System.out.println(list.size());
+			count += list.size();
+//			System.out.println(list.size());
 		}
+		System.out.println("first k skylines point set size :" + count);
 	}
 	/**
 	 * 公开的方法
@@ -214,6 +217,8 @@ public class DSGGenerator {
 				dsgList.add(node);
 			}
 		}
+		System.out.println("Sk:"+dsgList.size());
+//		System.out.println("perfectNode:" + perfectNodeList.size());
 		return dsg;
 	}
 	/**

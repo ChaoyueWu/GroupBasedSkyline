@@ -12,8 +12,9 @@ public class Test {
 		FileReader reader = null;
 		BufferedReader br = null;
 		int d = 0;
+		int k = 6;
 		try {
-			reader = new FileReader("dataSet/anti_2.txt");
+			reader = new FileReader("dataSet/corr_4.txt");
 			br = new BufferedReader(reader);
 			String str;
 			while((str = br.readLine()) != null) {
@@ -32,7 +33,7 @@ public class Test {
 		
 		d = points.get(0).getAttributes().length;
 		
-		DSGGenerator sg = new DSGGenerator(4,points,d);
+		DSGGenerator sg = new DSGGenerator(k,points,d);
 		
 		ProcessResult dsg = sg.generateDSG();
 //		for(DSGNode node:dsg.DSG){
@@ -41,24 +42,24 @@ public class Test {
 		
 //		long startTime = System.nanoTime();//毫微秒
 //		PointWise pointWise = new PointWise();
-//		int groupsSize = pointWise.pointWiseCalculate(4, dsg);
+//		int groupsSize = pointWise.pointWiseCalculate(k, dsg);
 //		long endTine = System.nanoTime();//毫微秒
 //		System.out.println("point wise size: "+ groupsSize);
 //		System.out.println("point wise time : " +(endTine - startTime)/1000);
 		
 //		long startTime = System.nanoTime();//毫微秒
 //		PointWiseUsingArray pointWiseUsingArray = new PointWiseUsingArray();
-//		int groupsSize = pointWiseUsingArray.pointWiseCalculate(4, dsg);
+//		int groupsSize = pointWiseUsingArray.pointWiseCalculate(k, dsg);
 //		long endTine = System.nanoTime();//毫微秒
-//		System.out.println("point wise2 array size: "+ groupsSize);
-//		System.out.println("point wise2 array time : " +(endTine - startTime)/1000);
+//		System.out.println("point wise array size: "+ groupsSize);
+//		System.out.println("point wise array time : " +(endTine - startTime)/1000);
 //		
-//		UnitWise uw = new UnitWise();
-//		long startTime = System.nanoTime();//毫微秒
-//		List<List<Integer>> result = uw.unitWiseCalculate(4, dsg.DSG);
-//		long endTine = System.nanoTime();//毫微秒
-//		System.out.println("unit wise1 size "+result.size());
-//		System.out.println("unit wise1 time : " +(endTine - startTime)/1000);
+		UnitWise uw = new UnitWise();
+		long startTime = System.nanoTime();//毫微秒
+		List<List<Integer>> result = uw.unitWiseCalculate(k, dsg.DSG);
+		long endTine = System.nanoTime();//毫微秒
+		System.out.println("unit wise+ size "+(result.size()+dsg.perfectNodeList.size()));
+		System.out.println("unit wise+ time : " +(endTine - startTime)/1000);
 		
 //		UnitWise2 uw = new UnitWise2();
 //		long startTime = System.nanoTime();//毫微秒
