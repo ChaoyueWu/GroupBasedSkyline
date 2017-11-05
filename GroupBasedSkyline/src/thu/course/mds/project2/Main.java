@@ -23,7 +23,7 @@ public class Main {
 		FileReader reader = null;
 		BufferedReader br = null;
 		try {
-			reader = new FileReader("dataSet/"+filename+".txt");
+			reader = new FileReader(filename);
 			br = new BufferedReader(reader);
 			String str;
 			while((str = br.readLine()) != null) {
