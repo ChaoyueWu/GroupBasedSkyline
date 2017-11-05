@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Set;
 
 public class UnitWise {
-	public List<List<Integer>> unitWiseCalculate(int k , List<DSGNode> dsg){
-		
-		List<List<Integer>> resultIdx = new ArrayList<List<Integer>>();
+	public long unitWiseCalculate(int k , ProcessResult result){
+		List<DSGNode> dsg = result.DSG;
+		List<List<Integer>> resultIdx = result.resultIdx;
 		
 		RefDSG refdsg = new RefDSG(dsg);
 		/*
@@ -29,6 +29,7 @@ public class UnitWise {
 		 * p7	10
 		 * */
 		
+		long finalCount = 0;
 		UnitGroup[] singleUnitGroups = new UnitGroup[refdsg.numNodes];
 		for (int i =0;i<refdsg.numNodes;i++) {
 			singleUnitGroups[i] = new UnitGroup(refdsg.orderedUnits[i], i);
@@ -46,11 +47,12 @@ public class UnitWise {
 				glast.addAll(singleUnitGroups[j].nodes);
 			}
 			if (glast.size() == k) {
-				List<Integer> oneResult = new ArrayList<Integer>();
-				for (RefNode rn : glast) {
-					oneResult.add(rn.originPointIdx);
-				}
-				resultIdx.add(oneResult);
+//				List<Integer> oneResult = new ArrayList<Integer>();
+//				for (RefNode rn : glast) {
+//					oneResult.add(rn.originPointIdx);
+//				}
+//				resultIdx.add(oneResult);
+				finalCount ++;
 				break;
 			}
 			else if (glast.size() < k) {
@@ -78,11 +80,12 @@ public class UnitWise {
 							newUnitGroup.addUnit(refdsg.orderedUnits[c], c);
 							
 							if (newUnitGroup.nodes.size() == k) {
-								List<Integer> newResult = new ArrayList<Integer>();
-								for (RefNode rn : newUnitGroup.nodes) {
-									newResult.add(rn.originPointIdx);
-								}
-								resultIdx.add(newResult);
+//								List<Integer> newResult = new ArrayList<Integer>();
+//								for (RefNode rn : newUnitGroup.nodes) {
+//									newResult.add(rn.originPointIdx);
+//								}
+//								resultIdx.add(newResult);
+								finalCount ++;
 							}
 							else if (newUnitGroup.nodes.size() < k) {
 								newCandiGroups.add(newUnitGroup);	
@@ -93,7 +96,7 @@ public class UnitWise {
 				candiGroups = newCandiGroups;
 			}		
 		}	
-		return resultIdx;
+		return finalCount;
 	}
 	
 		

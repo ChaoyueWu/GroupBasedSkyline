@@ -8,11 +8,13 @@ public class ProcessResult{
 	List<DSGNode> perfectNodeList;
 	List<PointWise_Group> groupList;
 	List<List<Integer>> groupArray;
+	List<List<Integer>> resultIdx;
 	
 	public ProcessResult() {
 		DSG = new ArrayList<DSGNode>();
 		perfectNodeList = new ArrayList<DSGNode>();
 		groupList = new ArrayList<PointWise_Group>();
 		groupArray = new ArrayList<List<Integer>>();
+		resultIdx = new ArrayList<List<Integer>>();
 	}
 }

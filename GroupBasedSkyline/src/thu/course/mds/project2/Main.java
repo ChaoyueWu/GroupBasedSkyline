@@ -48,7 +48,7 @@ public class Main {
 		if(funcNum == 1) {
 			long startTime = System.nanoTime();//毫微秒
 			PointWiseUsingArray pointWiseUsingArray = new PointWiseUsingArray();
-			int groupsSize = pointWiseUsingArray.pointWiseCalculate(k, dsg);
+			long groupsSize = pointWiseUsingArray.pointWiseCalculate(k, dsg);
 			long endTine = System.nanoTime();//毫微秒
 			System.out.println("point wise array size: "+ groupsSize);
 			System.out.println("point wise array time : " +(endTine - startTime)/1000);
@@ -56,9 +56,9 @@ public class Main {
 		else {
 			UnitWise uw = new UnitWise();
 			long startTime = System.nanoTime();//毫微秒
-			List<List<Integer>> result = uw.unitWiseCalculate(k, dsg.DSG);
+			long result = uw.unitWiseCalculate(k, dsg);
 			long endTine = System.nanoTime();//毫微秒
-			System.out.println("unit wise+ size "+(result.size()+dsg.perfectNodeList.size()));
+			System.out.println("unit wise+ size "+(result+dsg.perfectNodeList.size()));
 			System.out.println("unit wise+ time : " +(endTine - startTime)/1000);
 		}
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class PointWiseUsingArray {
-	int pointWiseCalculate(int k , ProcessResult dsg) {
+	long pointWiseCalculate(int k , ProcessResult dsg) {
 		List<DSGNode> DSG = dsg.DSG;
 		List<List<Integer>> groupListNew = dsg.groupArray;
 		
@@ -23,13 +23,14 @@ public class PointWiseUsingArray {
 		List<List<Integer>> groupList = new ArrayList<List<Integer>>();
 		List<Integer> g0 = new ArrayList<Integer>(k);
 		groupList.add(g0);
-		int start = 0;
-		int count = 1; // count代表第i-1层的节点数目
+		long start = 0;
+		long count = 1; // count代表第i-1层的节点数目
+		long finalCount = 1;
 		for(int i = 1 ; i <= k ; i ++) {
-			int tmpCount = 0; //记录第i层的节点数目
+			long tmpCount = 0; //记录第i层的节点数目
 			//遍历第i-1层的每个group
-			for(int j = start ; j < count ; j ++) {
-				List<Integer> list = groupList.get(j);
+			for(long j = start ; j < count ; j ++) {
+				List<Integer> list = groupList.get((int)j);
 				for(int nodeIndex : list) {
 					List<Integer> childrenList = DSG.get(nodeIndex).getChildren();
 					for(int child : childrenList) {
@@ -70,14 +71,14 @@ public class PointWiseUsingArray {
 					set1.addAll(DSG.get(candidate).getParents());
 					set1.add(candidate);
 					if(set1.size() == i) {
-						List<Integer> gNew = new ArrayList<Integer>(k);
-						gNew.addAll(list);
-						gNew.add(candidate);
 						if(i == k) {
-							groupListNew.add(gNew);
+//							groupListNew.add(gNew);
 						}
 						else
 						{
+							List<Integer> gNew = new ArrayList<Integer>(k);
+							gNew.addAll(list);
+							gNew.add(candidate);
 							groupList.add(gNew);
 						}
 						tmpCount ++;
@@ -95,8 +96,9 @@ public class PointWiseUsingArray {
 			}
 //			System.out.println("tmpCount: "+ tmpCount);
 			start = count;
+			finalCount = tmpCount;
 			count = tmpCount + count;
 		}
-		return (groupListNew.size() + dsg.perfectNodeList.size());
+		return (finalCount + dsg.perfectNodeList.size());
 	}
 }
