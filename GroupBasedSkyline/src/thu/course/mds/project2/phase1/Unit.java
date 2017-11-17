@@ -1,4 +1,4 @@
-package thu.course.mds.project2;
+package thu.course.mds.project2.phase1;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package thu.course.mds.project2;
+package thu.course.mds.project2.phase1;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class UnitWise {
-	public long unitWiseCalculate(int k , ProcessResult result){
-		List<DSGNode> dsg = result.DSG;
-		List<List<Integer>> resultIdx = result.resultIdx;
+public class UnitWise2 {
+	public List<List<Integer>> unitWiseCalculate(int k , List<DSGNode> dsg){
+		
+		List<List<Integer>> resultIdx = new ArrayList<List<Integer>>();
 		
 		RefDSG refdsg = new RefDSG(dsg);
 		/*
@@ -29,12 +29,7 @@ public class UnitWise {
 		 * p7	10
 		 * */
 		
-		long finalCount = 0;
-		UnitGroup[] singleUnitGroups = new UnitGroup[refdsg.numNodes];
-		for (int i =0;i<refdsg.numNodes;i++) {
-			singleUnitGroups[i] = new UnitGroup(refdsg.orderedUnits[i], i);
-		}
-			
+		UnitGroup[] singleUnitGroups = refdsg.orderedUnitGroups;
 		
 		for (int a=0;a<singleUnitGroups.length;a++) {
 						
@@ -47,12 +42,11 @@ public class UnitWise {
 				glast.addAll(singleUnitGroups[j].nodes);
 			}
 			if (glast.size() == k) {
-//				List<Integer> oneResult = new ArrayList<Integer>();
-//				for (RefNode rn : glast) {
-//					oneResult.add(rn.originPointIdx);
-//				}
-//				resultIdx.add(oneResult);
-				finalCount ++;
+				List<Integer> oneResult = new ArrayList<Integer>();
+				for (RefNode rn : glast) {
+					oneResult.add(rn.originPointIdx);
+				}
+				resultIdx.add(oneResult);
 				break;
 			}
 			else if (glast.size() < k) {
@@ -77,15 +71,14 @@ public class UnitWise {
 						if (!ps.contains(refdsg.orderedNodes[c])) {
 							
 							UnitGroup newUnitGroup = new UnitGroup(curCandiGroup);
-							newUnitGroup.addUnit(refdsg.orderedUnits[c], c);
+							newUnitGroup.addUnitGroup(refdsg.orderedUnitGroups[c], c);
 							
 							if (newUnitGroup.nodes.size() == k) {
-//								List<Integer> newResult = new ArrayList<Integer>();
-//								for (RefNode rn : newUnitGroup.nodes) {
-//									newResult.add(rn.originPointIdx);
-//								}
-//								resultIdx.add(newResult);
-								finalCount ++;
+								List<Integer> newResult = new ArrayList<Integer>();
+								for (RefNode rn : newUnitGroup.nodes) {
+									newResult.add(rn.originPointIdx);
+								}
+								resultIdx.add(newResult);
 							}
 							else if (newUnitGroup.nodes.size() < k) {
 								newCandiGroups.add(newUnitGroup);	
@@ -96,53 +89,31 @@ public class UnitWise {
 				candiGroups = newCandiGroups;
 			}		
 		}	
-		return finalCount;
+		return resultIdx;
 	}
 	
 		
 	class UnitGroup {
 		
 		int tailIdx = -1;
+		int originPointIdx = -1;
 		Set<RefNode> nodes = new HashSet<RefNode>();
-		
-		public UnitGroup(Unit u, int tailIdx) {
-			this.nodes.addAll(u.parents);
-			this.nodes.add(u.startNode);
-			this.tailIdx = tailIdx;
-		}
 		
 		public UnitGroup(UnitGroup ug) {
 			this.nodes.addAll(ug.nodes);
 			this.tailIdx = ug.tailIdx;
+			this.originPointIdx = ug.originPointIdx;
 		}
 		
+		public UnitGroup(RefNode rn) {
+			this.nodes.add(rn);
+			this.originPointIdx = rn.originPointIdx;
+		}
 		
-		public void addUnit(Unit u, int newTailIdx) {
-			this.nodes.addAll(u.parents);
-			this.nodes.add(u.startNode);
+		public void addUnitGroup(UnitGroup u, int newTailIdx) {
+			this.nodes.addAll(u.nodes);
 			this.tailIdx = newTailIdx;
 		}
-	}
-	
-	
-	class Unit {
-		
-		Set<RefNode> parents;
-		RefNode startNode;
-		
-		Unit(RefNode start) {
-			this.parents = new HashSet<RefNode>();
-			if (start.parents != null) {
-				this.parents.addAll(start.parents);
-			}
-			this.startNode = start;
-		}
-		
-		public void unionParentUnit(Unit u) {
-			this.parents.add(u.startNode);
-			this.parents.addAll(u.parents);
-		}
-	
 	}
 	
 	class RefNode {
@@ -177,13 +148,13 @@ public class UnitWise {
 	class RefDSG {
 		
 		RefNode[] orderedNodes = null;
-		Unit[] orderedUnits = null;
+		UnitGroup[] orderedUnitGroups = null;
 		int numNodes = 0;
 				
 		public RefDSG(List<DSGNode> dsgNodes) {
 			numNodes = dsgNodes.size();
 			orderedNodes = new RefNode[numNodes];
-			orderedUnits = new Unit[numNodes];
+			orderedUnitGroups = new UnitGroup[numNodes];
 			
 			for (int i=0;i<numNodes;i++) {
 				orderedNodes[i] = new RefNode(dsgNodes.get(i).getPointIndex());
@@ -196,12 +167,12 @@ public class UnitWise {
 				}
 			}
 			for (int i=0;i<numNodes;i++) {
-				orderedUnits[i] = new Unit(orderedNodes[i]);
+				orderedUnitGroups[i] = new UnitGroup(orderedNodes[i]);
 			}
 			for (int i=0;i<numNodes;i++) {
 				DSGNode dsgn = dsgNodes.get(i);
 				for (int p : dsgn.getChildren()) {
-					orderedUnits[p].unionParentUnit(orderedUnits[i]);
+					orderedUnitGroups[p].nodes.addAll(orderedUnitGroups[i].nodes);
 				}
 			}
 
@@ -211,11 +182,14 @@ public class UnitWise {
 				return d2.originPointIdx - d1.originPointIdx;
 			}});
 			
-			Arrays.sort(orderedUnits, new Comparator<Unit>(){
-				public int compare(Unit d1, Unit d2) {
-					return d2.startNode.originPointIdx - d1.startNode.originPointIdx;
+			Arrays.sort(orderedUnitGroups, new Comparator<UnitGroup>(){
+				public int compare(UnitGroup d1, UnitGroup d2) {
+					return d2.originPointIdx - d1.originPointIdx;
 				}});
 			
+			for (int i=0;i<numNodes;i++) {
+				orderedUnitGroups[i].tailIdx = i;
+			}
 			
 		}	
 	}

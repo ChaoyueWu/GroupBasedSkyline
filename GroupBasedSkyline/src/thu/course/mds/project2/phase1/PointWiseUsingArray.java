@@ -1,13 +1,14 @@
-package thu.course.mds.project2;
+package thu.course.mds.project2.phase1;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-public class PointWise {
-	int pointWiseCalculate(int k , ProcessResult dsg){
+
+public class PointWiseUsingArray {
+	long pointWiseCalculate(int k , ProcessResult dsg) {
 		List<DSGNode> DSG = dsg.DSG;
-		List<PointWise_Group> groupListNew = dsg.groupList;
+		List<List<Integer>> groupListNew = dsg.groupArray;
 		
 		int Sk = DSG.size();
 		
@@ -19,30 +20,23 @@ public class PointWise {
 		}
 		
 		Set<Integer> set1 = new HashSet<Integer>();
-		List<PointWise_Group> groupList = new ArrayList<PointWise_Group>();
-		PointWise_Group g0 = new PointWise_Group(k);
+		List<List<Integer>> groupList = new ArrayList<List<Integer>>();
+		List<Integer> g0 = new ArrayList<Integer>(k);
 		groupList.add(g0);
-		int start = 0;
-		int count = 1; // count代表第i-1层的节点数目
+		long start = 0;
+		long count = 1; // count代表第i-1层的节点数目
+		long finalCount = 1;
 		for(int i = 1 ; i <= k ; i ++) {
-			int tmpCount = 0; //记录第i层的节点数目
-			
+			long tmpCount = 0; //记录第i层的节点数目
 			//遍历第i-1层的每个group
-			for(int j = start ; j < count ; j ++) {
-//				System.out.println(j);
-				PointWise_Group g = groupList.get(j);
-				List<Integer> list = g.list;
-				
-//				long startTime = System.nanoTime();//毫微秒
+			for(long j = start ; j < count ; j ++) {
+				List<Integer> list = groupList.get((int)j);
 				for(int nodeIndex : list) {
 					List<Integer> childrenList = DSG.get(nodeIndex).getChildren();
 					for(int child : childrenList) {
 						children[child] = 1;
 					}
 				}
-//				long endTime = System.nanoTime();//毫微秒
-//				System.out.println("get children shuzu"+(endTime - startTime));
-				
 				int maxLayer;
 				int tailIndex;
 				if(list.size() == 0) {
@@ -55,7 +49,6 @@ public class PointWise {
 					maxLayer = lastNode.getLayerIndex();
 					tailIndex = lastNode.getPointIndex() + 1;
 				}
-				
 				for(int t = tailIndex ; t < Sk ; t++) {
 					//g的tail Set从 tailIndex 开始
 					DSGNode node = DSG.get(t);
@@ -74,16 +67,18 @@ public class PointWise {
 				}
 				for(int candidate = 0 ; candidate < Sk ; candidate ++) {
 					if(tailList[candidate] == 0)continue;
-					set1.addAll(g.list);
+					set1.addAll(list);
 					set1.addAll(DSG.get(candidate).getParents());
 					set1.add(candidate);
 					if(set1.size() == i) {
-						PointWise_Group gNew = new PointWise_Group(g ,candidate,k);
 						if(i == k) {
-							groupListNew.add(gNew);
+//							groupListNew.add(gNew);
 						}
 						else
 						{
+							List<Integer> gNew = new ArrayList<Integer>(k);
+							gNew.addAll(list);
+							gNew.add(candidate);
 							groupList.add(gNew);
 						}
 						tmpCount ++;
@@ -99,9 +94,11 @@ public class PointWise {
 					tailList[m] = 0;
 				}
 			}
+//			System.out.println("tmpCount: "+ tmpCount);
 			start = count;
+			finalCount = tmpCount;
 			count = tmpCount + count;
 		}
-		return (groupListNew.size() + dsg.perfectNodeList.size());
+		return (finalCount + dsg.perfectNodeList.size());
 	}
 }

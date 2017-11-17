@@ -1,4 +1,4 @@
-package thu.course.mds.project2;
+package thu.course.mds.project2.phase1;
 
 /**
  * 读取的原始数据集条目结构
