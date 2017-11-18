@@ -16,14 +16,12 @@ public class Main {
 		int k = scan.nextInt();
 		System.out.println("please input the filename:");
 		String filename = scan.next();
-		System.out.println("please input the function : 1 means point wise , 2 means unit wise:");
-		int funcNum = scan.nextInt();
 		scan.close();
 		List<Point> points  = new ArrayList<Point>();
 		FileReader reader = null;
 		BufferedReader br = null;
 		try {
-			reader = new FileReader(filename);
+			reader = new FileReader("dataSet/"+filename+".txt");
 			br = new BufferedReader(reader);
 			String str;
 			while((str = br.readLine()) != null) {
@@ -41,26 +39,14 @@ public class Main {
 		} // 读取文本中内容
 		
 		int d = points.get(0).getAttributes().length;
+		System.out.println(points.size());
 		
-		DSGGenerator sg = new DSGGenerator(k,points,d);
-		ProcessResult dsg = sg.generateDSG();
+		DSGGenerator sg = new DSGGenerator(points.size(),points,d);
+		ProcessResult dsg = sg.generateDSG(k);
 		
-		if(funcNum == 1) {
-			long startTime = System.nanoTime();//毫微秒
-			PointWiseUsingArray pointWiseUsingArray = new PointWiseUsingArray();
-			long groupsSize = pointWiseUsingArray.pointWiseCalculate(k, dsg);
-			long endTine = System.nanoTime();//毫微秒
-			System.out.println("point wise array size: "+ groupsSize);
-			System.out.println("point wise array time : " +(endTine - startTime)/1000);
-		}
-		else {
-			UnitWise uw = new UnitWise();
-			long startTime = System.nanoTime();//毫微秒
-			long result = uw.unitWiseCalculate(k, dsg);
-			long endTine = System.nanoTime();//毫微秒
-			System.out.println("unit wise+ size "+(result+dsg.perfectNodeList.size()));
-			System.out.println("unit wise+ time : " +(endTine - startTime)/1000);
-		}
+		AGNew ag = new AGNew();
+		long result = ag.agCalculate(k, dsg);
+		System.out.println(result);
 	}
 
 }

@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class DSGGenerator {
 	private int k;//layers of skyline
+	private int realK;
 	private List<Point> points;//传入的待分组点的集合
 	private int d;//dimension of each point's attributes
 	private List<ArrayList<Point>> skylines;//存放每条skyline
@@ -129,13 +130,15 @@ public class DSGGenerator {
 		int i = 1;
 		int count = 0;
 		for(ArrayList<Point> list:skylines){
-//			System.out.println("skyline "+i++);
-//			for(Point p:list){
-//				System.out.print(p);
-//				
-//			}
+			if(list.size() == 0)
+				break;
+			System.out.println("skyline "+i++);
+			for(Point p:list){
+				System.out.print(p);
+				
+			}
 			count += list.size();
-//			System.out.println(list.size());
+			System.out.println(list.size());
 		}
 		System.out.println("first k skylines point set size :" + count);
 	}
@@ -144,46 +147,67 @@ public class DSGGenerator {
 	 * 生成DSG供后续步骤使用
 	 * @return
 	 */
-	public ProcessResult generateDSG(){
-		long startTime = System.nanoTime();//毫微秒
+	public ProcessResult generateDSG(int newk){
+//		long startTime = System.nanoTime();//毫微秒
 		this.generateSkylines();
-		long endTine = System.nanoTime();//毫微秒
-		System.out.println("generate first k skylines time : " +(endTine - startTime)/1000);
+//		long endTine = System.nanoTime();//毫微秒
+//		System.out.println("generate first k skylines time : " +(endTine - startTime)/1000);
 		this.showSkylines();
 		
+		this.realK = newk;
+		
 		ProcessResult dsg = new ProcessResult();
-		List<DSGNode> perfectNodeList = dsg.perfectNodeList;
-		for(int i = k -1 ; i >= 0 ; i --) {//从大往小遍历预处理
-			ArrayList<Point> skyline = skylines.get(i);
-			Iterator<Point> it = skyline.listIterator();
-			while(it.hasNext()) {
-				Point p = it.next();
-				int countPatrents = 0;
-				List<Integer> parents = new ArrayList<Integer>();
-				for(int m = 0 ; m < i ; m ++) {
-					ArrayList<Point> skylineP = skylines.get(m);
-					for(int n = 0 ; n < skylineP.size() ; n ++) {
-						if(p.isDominatedBy(skylineP.get(n), d)) {
-							countPatrents ++;
-							parents.add(skylineP.get(n).getIdx());
-						}
-					}
-				}
-				if(countPatrents > k - 1) {
-					it.remove();
-				}
-				else if(countPatrents == k - 1) {
-					it.remove();
-//					System.out.println("oriPerfect");
-					DSGNode node = new DSGNode(i + 1,p.getIdx(),this.d,toArrayList(p.getAttributes()));
-					perfectNodeList.add(node);
-				}
-			}
-		}
+		
+//		long perfectNum = dsg.perfectNum;
+//		int tmpIndex = 0;
+//		for(int i = 0 ; i < k ; i ++) {
+//			ArrayList<Point> skyline = skylines.get(i);
+//			if(skyline.size() == 0)
+//				break;
+//			Iterator<Point> it = skyline.listIterator();
+//			while(it.hasNext()) {
+//				Point p = it.next();
+//				int countPatrents = 0;
+//				List<Integer> parents = new ArrayList<Integer>();
+//				for(int m = 0 ; m < i ; m ++) {
+//					ArrayList<Point> skylineP = skylines.get(m);
+//					for(int n = 0 ; n < skylineP.size() ; n ++) {
+//						if(p.isDominatedBy(skylineP.get(n), d)) {
+//							countPatrents ++;
+//							parents.add(skylineP.get(n).getIdx());
+//						}
+//					}
+//				}
+//				System.out.println("index: " + tmpIndex + " size of parents: " + parents.size());
+//		
+//				if(countPatrents < k -1) {
+//					perfectNum += AG.C2(realK-1, points.size() - tmpIndex - 1);
+//					it.remove();
+//				}
+//				else if(countPatrents == k -1) {
+//					List<Integer> children = new ArrayList<Integer>();
+//					for(int m = i + 1 ; m < k ; m ++) {
+//						ArrayList<Point> skylineC = skylines.get(m);
+//						for(int n = 0 ; n < skylineC.size() ; n ++) {
+//							if(skylineC.get(n).isDominatedBy(p, d)) {
+//								children.add(skylineC.get(n).getIdx());
+//							}
+//						}
+//					}
+//					long invalidCombinations = AG.C2(realK-1, children.size());
+//					perfectNum += (AG.C2(k-1, points.size() - tmpIndex - 1) - invalidCombinations );
+//					it.remove();
+//				}
+//				tmpIndex ++;
+//			}
+//		}
+		
 		int index = 0;		
 		
 		for(int i = 0 ; i < k ; i ++) {
 			ArrayList<Point> skyline = skylines.get(i);
+			if(skyline.size() == 0)
+				break;
 			for(int j = 0 ; j < skyline.size() ; j ++) {
 				Point p = skyline.get(j);
 				p.setIdx(index);
