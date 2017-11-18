@@ -7,28 +7,32 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import thu.course.mds.project2.phase1.UnitWise.RefNode;
+import thu.course.mds.project2.phase1.UnitWise.Unit;
+
 public class AG {
 	
 	public long agCalculate(int k , ProcessResult result){
 		
 		List<DSGNode> dsg = result.DSG;
-		
 		RefDSG refdsg = new RefDSG(dsg);
 		
 		long finalCount = 0;
 		
-		Group[] startGroups = refdsg.startGroups;
 		List<Group> workList = new ArrayList<Group>();
-		workList.addAll(Arrays.asList(startGroups));
+		workList.add(new Group());
 		
-		for (int i=1;i<k;i++) {
+		for (int i=1;i<=k;i++) {
 			List<Group> nextWorkList = new ArrayList<Group>();
 			for (Group g : workList) {
-				Set<RefNode> childrenSet = g.totalDescendants;
+				Set<RefNode> childrenSet = new HashSet<RefNode>();
+				for (RefNode n : g.commonUnitNodes()) {
+					childrenSet.addAll(n.descendants);
+				}
 				List<Integer> tailSet = new ArrayList<Integer>();
 				for (int j=g.tailIdx+1;j<refdsg.numNodes;j++) {
 					if (!childrenSet.contains(refdsg.orderedNodes[j])) {
-						finalCount += C2(k-i-1, refdsg.numNodes-i-1);
+						finalCount += C2(k-i, refdsg.numNodes-i);
 					}
 					else {
 						tailSet.add(j);
@@ -36,13 +40,14 @@ public class AG {
 				}
 				for (int j : tailSet) {
 					Group newGroup = new Group(g, j);
-					newGroup.addNode(refdsg.orderedNodes[j], j);
-					if (newGroup.totalAncestors.size() < k) {
-						finalCount += C2(k-i-1, refdsg.numNodes-i-1);
+					newGroup.addUnit(refdsg.orderedUnits[j], j);
+					Set<RefNode> commonUnitNodes = newGroup.commonUnitNodes();
+					if (commonUnitNodes.size() < k) {
+						finalCount += C2(k-i, refdsg.numNodes-i);
 					}
-					else if (newGroup.totalAncestors.size() == k) {
-						int invalidCombinations = C2(k-i-1, newGroup.totalDescendants.size()); 
-						finalCount += C2(k-i-1, refdsg.numNodes-i-1) - invalidCombinations;
+					else if (commonUnitNodes.size() == k) {
+						int invalidCombinations = C2(k-i, newGroup.commonDescendants().size()); 
+						finalCount += C2(k-i, refdsg.numNodes-i) - invalidCombinations;
 					}
 					else {
 						nextWorkList.add(newGroup);
@@ -82,28 +87,87 @@ public class AG {
 		int tailIdx = -1;
 		Set<RefNode> nodes = new HashSet<RefNode>();
 		Set<RefNode> totalAncestors = new HashSet<RefNode>();
-		Set<RefNode> totalDescendants = new HashSet<RefNode>();
+		Set<Unit> units = new HashSet<Unit>();
 		
-		public Group(RefNode n, int tailIdx) {
-			this.nodes.add(n);
-			this.totalAncestors.addAll(n.ancestors);
-			this.totalDescendants.addAll(n.descendants);
-			this.tailIdx = tailIdx;
-		}	
+		public Group() {
+			
+		}
+		
 		
 		public Group(Group g, int newTailIdx) {
 			this.nodes.addAll(g.nodes);
 			this.totalAncestors.addAll(g.totalAncestors);
-			this.totalDescendants.addAll(g.totalDescendants);
 			this.tailIdx = newTailIdx;
+			this.units.addAll(g.units);
+		}
+
+		
+		public Set<RefNode> commonUnitNodes() {
+			Set<RefNode> result = new HashSet<RefNode>();
+			if (this.units.isEmpty()) {
+				return result;
+			}
+			boolean empty = true; 
+			for (Unit u : this.units) {
+				if (empty) {
+					result.addAll(u.unitNodes);
+					empty = false; 
+				}
+				else {
+					result.removeAll(u.unitNodes);
+				}
+				if (result.isEmpty()) {
+					break;
+				}
+			}
+			return result;
 		}
 		
-		public void addNode(RefNode node, int tailIdx) {
-			this.tailIdx = tailIdx;
-			this.nodes.add(node);
-			this.totalAncestors.addAll(node.ancestors);
-			this.totalDescendants.addAll(node.descendants);
+		public Set<RefNode> commonDescendants() {
+			Set<RefNode> result = new HashSet<RefNode>();
+			if (this.units.isEmpty()) {
+				return result;
+			}
+			boolean empty = true; 
+			for (RefNode n : this.nodes) {
+				if (empty) {
+					result.addAll(n.descendants);
+					empty = false; 
+				}
+				else {
+					result.removeAll(n.descendants);
+				}
+				if (result.isEmpty()) {
+					break;
+				}
+			}
+			return result;
 		}
+		
+		public void addUnit(Unit u, int tailIdx) {
+			this.nodes.addAll(u.unitNodes);
+			this.totalAncestors.addAll(u.ancestors);
+			this.units.add(u);
+			this.tailIdx = tailIdx;
+		}
+	}
+	
+	
+	class Unit {
+		
+		Set<RefNode> ancestors = new HashSet<RefNode>();
+		Set<RefNode> unitNodes = new HashSet<RefNode>();
+		RefNode node;
+		
+		Unit(RefNode node) {
+			if (node.ancestors != null) {
+				this.ancestors.addAll(node.ancestors);
+				this.unitNodes.addAll(node.ancestors);
+			}
+			this.node = node;
+			this.unitNodes.add(node);
+		}
+	
 	}
 
 	
@@ -139,13 +203,12 @@ public class AG {
 	class RefDSG {
 		
 		RefNode[] orderedNodes = null;
-		Group[] startGroups = null;
+		Unit[] orderedUnits = null;
 		int numNodes = 0;
 				
 		public RefDSG(List<DSGNode> dsgNodes) {
 			numNodes = dsgNodes.size();
 			orderedNodes = new RefNode[numNodes];
-			startGroups = new Group[numNodes];
 			
 			for (int i=0;i<numNodes;i++) {
 				orderedNodes[i] = new RefNode(dsgNodes.get(i).getPointIndex());
@@ -158,7 +221,7 @@ public class AG {
 				}
 			}
 			for (int i=0;i<numNodes;i++) {
-				startGroups[i] = new Group(orderedNodes[i], i);
+				orderedUnits[i] = new Unit(orderedNodes[i]);
 			}
 		}	
 	}
