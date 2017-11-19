@@ -1,4 +1,4 @@
-package thu.course.mds.project2.phase1;
+package fornba;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -21,7 +21,7 @@ public class Main {
 		FileReader reader = null;
 		BufferedReader br = null;
 		try {
-			reader = new FileReader(filename);
+			reader = new FileReader("dataSet/"+filename+".txt");
 			br = new BufferedReader(reader);
 			String str;
 			while((str = br.readLine()) != null) {
