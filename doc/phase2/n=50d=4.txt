@@ -1,0 +1,126 @@
+k=2
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：1225
+大小为1的candidate group数0
+1225
+time : 1097
+
+Sk:50
+预处理之后剩余的点数：33
+预处理得到的group数目：639
+大小为1的candidate group数33
+819
+time : 5801
+
+Sk:50
+预处理之后剩余的点数：13
+预处理得到的group数目：224514
+大小为1的candidate group数13
+大小为2的candidate group数24
+大小为3的candidate group数16
+230296
+time : 3008
+
+
+k=4
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：230300
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+230300
+time : 1142
+
+Sk:50
+预处理之后剩余的点数：22
+预处理得到的group数目：218723
+大小为1的candidate group数22
+大小为2的candidate group数116
+大小为3的candidate group数364
+228718
+time : 13343
+
+Sk:50
+预处理之后剩余的点数：32
+预处理得到的group数目：185065
+大小为1的candidate group数32
+大小为2的candidate group数341
+大小为3的candidate group数2085
+219295
+time : 52407
+
+k=6
+Sk:50
+预处理之后剩余的点数：1
+预处理得到的group数目：15890700
+大小为1的candidate group数1
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 1654
+
+Sk:50
+预处理之后剩余的点数：17
+预处理得到的group数目：15870938
+大小为1的candidate group数17
+大小为2的candidate group数61
+大小为3的candidate group数113
+大小为4的candidate group数135
+大小为5的candidate group数108
+15890611
+time : 11362
+
+Sk:50
+预处理之后剩余的点数：10
+预处理得到的group数目：15688092
+大小为1的candidate group数10
+大小为2的candidate group数9
+大小为3的candidate group数1
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 2562
+
+k=8
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：536878650
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 1210
+
+Sk:50
+预处理之后剩余的点数：13
+预处理得到的group数目：536876439
+大小为1的candidate group数13
+大小为2的candidate group数29
+大小为3的candidate group数31
+大小为4的candidate group数16
+大小为5的candidate group数3
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 4502
+
+Sk:50
+预处理之后剩余的点数：6
+预处理得到的group数目：536878606
+大小为1的candidate group数6
+大小为2的candidate group数1
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidatea group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 2131

@@ -1,0 +1,121 @@
+k=2,anti corr inde
+Sk:50
+预处理之后剩余的点数：11
+预处理得到的group数目：1135
+大小为1的candidate group数11
+1213
+time : 1820
+
+Sk:50
+预处理之后剩余的点数：47
+预处理得到的group数目：50
+大小为1的candidate group数47
+50
+time : 25129
+
+Sk:50
+预处理之后剩余的点数：39
+预处理得到的group数目：363
+大小为1的candidate group数39
+494
+time : 8956
+
+k=4
+Sk:50
+预处理之后剩余的点数：3
+预处理得到的group数目：230299
+大小为1的candidate group数3
+大小为2的candidate group数1
+大小为3的candidate group数0
+230300
+time : 1744
+
+Sk:50
+预处理之后剩余的点数：46
+预处理得到的group数目：51935
+大小为1的candidate group数46
+大小为2的candidate group数1034
+大小为3的candidate group数15136
+51935
+time : 617751
+
+Sk:50
+预处理之后剩余的点数：32
+预处理得到的group数目：185065
+大小为1的candidate group数32
+大小为2的candidate group数341
+大小为3的candidate group数2085
+219295
+time : 53553
+
+k=6
+Sk:50
+预处理之后剩余的点数：1
+预处理得到的group数目：15890700
+大小为1的candidate group数1
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 1699
+
+Sk:50
+预处理之后剩余的点数：44
+预处理得到的group数目：8831648
+大小为1的candidate group数44
+大小为2的candidate group数946
+大小为3的candidate group数13244
+大小为4的candidate group数135751
+大小为5的candidate group数1086008
+8831648
+time : 48112515
+
+Sk:50
+预处理之后剩余的点数：28
+预处理得到的group数目：14690963
+大小为1的candidate group数28
+大小为2的candidate group数253
+大小为3的candidate group数1249
+大小为4的candidate group数3993
+大小为5的candidate group数8948
+15874094
+time : 132307
+
+k=8
+Sk:50
+预处理之后剩余的点数：1
+预处理得到的group数目：536878650
+大小为1的candidate group数1
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 1682
+
+Sk:50
+预处理之后剩余的点数：44
+预处理得到的group数目：8831648
+大小为1的candidate group数44
+大小为2的candidate group数946
+大小为3的candidate group数13244
+大小为4的candidate group数135751
+大小为5的candidate group数1086008
+8831648
+time : 28096736
+
+Sk:50
+预处理之后剩余的点数：25
+预处理得到的group数目：529004894
+大小为1的candidate group数25
+大小为2的candidate group数189
+大小为3的candidate group数776
+大小为4的candidate group数2059
+大小为5的candidate group数3814
+大小为6的candidate group数5146
+大小为7的candidate group数5196
+536873515
+time : 199233

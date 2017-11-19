@@ -1,0 +1,38 @@
+k=2
+Sk:500
+预处理之后剩余的点数：387
+预处理得到的group数目：48623
+大小为1的candidate group数387
+117179
+time : 72921
+
+Sk:500
+预处理之后剩余的点数：498
+预处理得到的group数目：499
+大小为1的candidate group数498
+499
+time : 5503423
+
+Sk:500
+预处理之后剩余的点数：482
+预处理得到的group数目：6411
+大小为1的candidate group数482
+10667
+time : 2486277
+
+k=4
+Sk:500
+预处理之后剩余的点数：297
+预处理得到的group数目：2154371966
+大小为1的candidate group数297
+大小为2的candidate group数2950
+大小为3的candidate group数18341
+2572912092
+time : 359555
+
+corr_2_500卡啊卡
+Sk:500
+预处理之后剩余的点数：495
+预处理得到的group数目：61504250
+大小为1的candidate group数495
+大小为2的candidate group数122265

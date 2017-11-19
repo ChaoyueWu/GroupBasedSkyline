@@ -45,8 +45,11 @@ public class Main {
 		ProcessResult dsg = sg.generateDSG(k);
 		
 		AGNew ag = new AGNew();
+		long startTime = System.nanoTime();//毫微秒
 		long result = ag.agCalculate(k, dsg);
 		System.out.println(result);
+		long endTine = System.nanoTime();//毫微秒
+		System.out.println("time : " +(endTine - startTime)/1000);
 	}
 
 }

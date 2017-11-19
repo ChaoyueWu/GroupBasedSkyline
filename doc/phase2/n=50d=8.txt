@@ -1,0 +1,124 @@
+k=2
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：1225
+大小为1的candidate group数0
+1225
+time : 1134
+
+Sk:50
+预处理之后剩余的点数：47
+预处理得到的group数目：50
+大小为1的candidate group数47
+50
+time : 24073
+
+Sk:50
+预处理之后剩余的点数：2
+预处理得到的group数目：1216
+大小为1的candidate group数2
+1225
+time : 1536
+
+k=4
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：230300
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+230300
+time : 1131
+
+Sk:50
+预处理之后剩余的点数：1
+预处理得到的group数目：230300
+大小为1的candidate group数1
+大小为2的candidate group数0
+大小为3的candidate group数0
+230300
+time : 1605
+
+Sk:50
+预处理之后剩余的点数：1
+预处理得到的group数目：230296
+大小为1的candidate group数1
+大小为2的candidate group数0
+大小为3的candidate group数0
+230300
+time : 1703
+
+k=6
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：15890700
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 1368
+
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：15890700
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 1332
+
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：15890700
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+15890700
+time : 1325
+
+k=8
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：536878650
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 1285
+
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：536878650
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 1305
+
+Sk:50
+预处理之后剩余的点数：0
+预处理得到的group数目：536878650
+大小为1的candidate group数0
+大小为2的candidate group数0
+大小为3的candidate group数0
+大小为4的candidate group数0
+大小为5的candidate group数0
+大小为6的candidate group数0
+大小为7的candidate group数0
+536878650
+time : 1281
+
