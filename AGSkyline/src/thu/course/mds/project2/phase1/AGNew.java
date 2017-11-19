@@ -26,10 +26,11 @@ public class AGNew {
 				workList.add(new Group(u));		
 		}
 		System.out.println("预处理之后剩余的点数："+workList.size());
-		System.out.println(finalCount);
+		System.out.println("预处理得到的group数目："+finalCount);
 //		workList.add(new Group());
 		for(int i = 1 ; i < k ; i ++) {
 			List<Group> nextWorkList = new ArrayList<Group>();
+			System.out.println("大小为"+i+"的candidate group数"+workList.size());
 			for (Group g : workList) {
 				Set<RefNode> childrenSet = new HashSet<RefNode>();
 				for (RefNode n : g.commonUnit) {
